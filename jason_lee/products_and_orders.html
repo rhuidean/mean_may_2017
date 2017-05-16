@@ -1,0 +1,133 @@
+<html ng-app='myApp'>
+<head>
+  <title></title>
+  <script src='bower_components/angular/angular.js'></script>
+  <script type='text/javascript'>
+    var myApp = angular.module('myApp', []);
+    myApp.factory('ProductFactory',function(){
+      var factory = {};
+      factory.products = [];
+      
+      factory.getProducts = function(callback){
+        callback(this.products);
+      }
+
+      factory.createProduct = function(newProduct,callback){
+        factory.products.push(newProduct);
+        callback();
+      }
+      
+      factory.destroyProduct = function(product,callback){
+        var i = this.products.indexOf(product);
+        this.products.splice(i,1);
+        callback();
+      }
+
+      factory.buyProduct = function(product,callback){
+        var i = this.products.indexOf(product);
+        console.log(this.products[i]);
+        console.log(this.products[i].quantity);
+        
+        if (this.products[i].quantity >0) {
+          this.products[i].quantity = this.products[i].quantity -1;
+        }
+        else {
+          this.products[i].quantity =0; 
+        }
+        callback();
+      }
+
+      return factory;
+    })
+    
+    myApp.controller('ProductsController', function ($scope, ProductFactory){
+      $scope.getProducts = function(){
+        ProductFactory.getProducts(function(products){
+          $scope.products = products;
+          console.log(products)
+        })
+      }
+  
+      $scope.createProduct = function(newProduct) {
+        ProductFactory.createProduct(newProduct,function(){
+          $scope.getProducts();
+          $scope.newProduct = {};
+        })
+      }
+
+      $scope.destroyProduct = function(product) {
+        console.log(product);
+        ProductFactory.destroyProduct(product,function(){
+          $scope.getProducts();
+        });
+      }
+    });
+
+    myApp.controller('OrdersController', function ($scope, ProductFactory){
+      $scope.getProducts = function(){
+        ProductFactory.getProducts(function(products){
+          $scope.products = products;
+          console.log(products)
+        })
+      }
+
+    });
+
+
+    myApp.controller('OrdersController', function ($scope, ProductFactory){
+      $scope.getProducts = function(){
+        ProductFactory.getProducts(function(products){
+          $scope.products = products;
+          console.log(products)
+        })
+      }
+  
+      $scope.buyProduct = function(product) {
+        console.log(product);
+        ProductFactory.buyProduct(product,function(){
+          $scope.getProducts();
+        });
+      }
+    });
+
+  </script>
+</head>
+<body>
+  <div ng-controller='ProductsController'> 
+    <form ng-submit="createProduct(newProduct)">
+      Product Name<input type="text" ng-model="newProduct.name">
+      Product Price<input type="text" ng-model="newProduct.price">
+      <input type="hidden" ng-init="newProduct.quantity=50" ng-model="newProduct.quantity">
+      <input type="submit" value="Create Product">
+    </form>
+    <table ng-init="getProducts()">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+      <tr ng-repeat="product in products">
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td><button ng-click="destroyProduct()">Delete Product</button></td>
+      </tr>
+    </table>
+  </div>
+  <div ng-controller='OrdersController'>
+    <table ng-init="getProducts()">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Qty Available</th>
+        <th>Actions</th>
+      </tr>
+      <tr ng-repeat="product in products">
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.quantity}}</td>
+        <td><button ng-click="buyProduct(product)">Buy Product</button></td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
