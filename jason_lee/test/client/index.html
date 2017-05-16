@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<script src="angular/angular.js"></script>
+	<script src="angular/app.js"></script>
+	<title></title>
+</head>
+<body>
+	<div class="container" ng-controller="UsersController">
+		<h1>hello {{ current_user.name }}</h1>
+		<ul ng-init="getUsers()">
+			<input type="text" ng-model="userSearch">
+			<li ng-repeat="user in users | filter: userSearch track by $index">{{user.name}} index: {{$index}}
+			<a ng-click="destroyUser(user)" href="#">Delete</a>
+			</li>
+		</ul>
+
+		<h1 ng-if="h1_state === true">I'm Conditional!!</h1>
+		<button ng-click="changeState()">Change State</button>
+	</div>
+	<form ng-submit="createUser(newUser)">
+		<input type="text" ng-model="newUser.name">
+		<input type="submit" value="Create User">
+	</form>
+	{{newUser.name}}
+</body>
+</html>
