@@ -1,0 +1,22 @@
+<div> 
+    <form ng-submit="AC.addAssignment(AC.newAssignment)" ng-init="AC.getPlayers();AC.getTeams()">
+    	<select ng-model="AC.newAssignment.player">
+          <option ng-repeat="player in AC.players">{{player.name}}</option>
+        </select>    
+    	<select ng-model="AC.newAssignment.team">
+          <option ng-repeat="team in AC.teams">{{team.name}}</option>
+        </select>
+    	<input type="submit" value="Assign Player to Team">
+    </form>
+    <table ng-init="AC.getPlayers()">
+      <tr>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+      <tr ng-repeat="player in AC.players">
+        <td>{{player.name}}</td>
+        <td>{{player.team}}</td>
+        <td><button ng-click="AC.clearAssignment()">Remove Team</button></td>
+      </tr>
+    </table>
+ </div>

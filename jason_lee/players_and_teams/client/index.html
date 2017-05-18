@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<script type="text/javascript" src='angular/angular.js'></script>
+	<script type="text/javascript" src='angular-route/angular-route.js'></script>
+	<script type="text/javascript" src="angular-animate/angular-animate.js"></script>
+	<script type="text/javascript" src='angular/app.js'></script>
+	<title></title>
+</head>
+<body>
+	<div ng-controller="MainCtrl as main">
+		<a href="#!/players">Players</a>
+		<a href="#!/teams">Teams</a>
+		<a href="#!/associations">Associations</a><br/>
+
+		<div class='view-animate-container'>
+			<div ng-view class='view-animate'></div>
+		</div>
+		<hr />
+	</div>
+</body>
+</html>
