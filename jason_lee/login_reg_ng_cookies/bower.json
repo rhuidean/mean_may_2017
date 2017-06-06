@@ -1,0 +1,17 @@
+{
+  "name": "login_reg_ng_cookies",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Jason <rhuidean06@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
