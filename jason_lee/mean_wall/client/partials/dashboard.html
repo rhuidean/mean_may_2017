@@ -1,0 +1,50 @@
+<div ng-init="UC.session()">
+	<div class="header">
+		<h3 class="inline_block">Fule Mean Wall</h3>
+		<h3 class="float_right inline_block">Welcome {{UC.current_user.name }}</h3>
+		<a href="#" ng-click="UC.logout()">Logout</a>
+		<hr>
+	</div>
+	<div class="messages" ng-controller="MessagesController as MC">
+		<!-- newMessage Object -->
+		<form ng-submit='MC.create(MC.newMessage)'>
+			<div>
+				<label>Post a message:</label>
+			</div>
+			<div>
+				<textarea ng-model="MC.newMessage.message"></textarea>
+			</div>
+			<div>
+				<input type="submit" name="Post Message">
+			</div>
+		</form>
+		<div>
+			<p class="error" ng-repeat="error in MC.new_message_errors">{{ error }}</p>
+		</div>
+		<div ng-init="MC.index()">
+			<div ng-repeat="message in MC.messages" ng-init="index = $index">
+				<!-- use unique loop iterator -->
+				<h4>{{message.user.name}} - {{message.createdAt}}</h4>
+				<p>{{message.message}}</p>
+				<div ng-repeat="comment in message.comments">
+					<h4>{{comment.user.name}}-{{comment.createdAt}}</h4>
+					<p>{{comment.comment}}</p>
+				</div>
+				<div class="left_indent">
+					<!-- pass in index -->
+					<form ng-submit="MC.createComment(MC.newComment, index, message._id)">
+						<div>
+							<label>Post a Comment:</label>
+						</div>
+						<div>
+							<!-- -->
+							<textarea ng-model="MC.newComment.comment[index].comment"></textarea>
+						</div>
+						<input type="submit" value="Post Comment">
+					</form>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>

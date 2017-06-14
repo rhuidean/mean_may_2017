@@ -1,0 +1,15 @@
+.float_right {
+	float: right;
+}
+
+.inline_block {
+	display: inline-block;
+}
+
+p.error {
+	color: red !important;
+}
+
+.left_indent {
+	margin-left: 5%;
+}

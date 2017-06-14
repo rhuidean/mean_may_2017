@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+	<!-- create controller -> html -> factory -> server -> controller -->
+	<title></title>
+	<script type="text/javascript" src="angular/angular.js"></script>
+	<script type="text/javascript" src="angular-route/angular-route.js"></script>
+	<script type="text/javascript" src="angular-cookies/angular-cookies.js"></script>
+	<script type="text/javascript" src="angular/config.js"></script>
+	<script type="text/javascript" src="angular/controllers/users_controller.js"></script>
+	<script type="text/javascript" src="angular/controllers/messages_controller.js"></script>
+	<script type="text/javascript" src="angular/factories/user_factory.js"></script>
+	<script type="text/javascript" src="angular/factories/message_factory.js"></script>
+	<script type="text/javascript" src="angular/factories/comment_factory.js"></script>
+	<!-- Link -->
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div ng-view></div>
+	</div>
+
+</body>
+</html>
